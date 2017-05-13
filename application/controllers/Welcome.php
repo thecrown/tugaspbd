@@ -7,4 +7,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('master_layout');
 	}
+	public function view_data()
+	{
+		$data['view_data']="view_data";
+		$this->load->view('content/',$data);
+	}
 }
