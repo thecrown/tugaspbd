@@ -18,7 +18,8 @@ class Auth extends CI_Model{
             $attr = array(
             'curent_user_id' => $query->row(0)->id,
             'curent_user_kd_akses' => $query->row(0)->role,
-            'curent_user_name'=> $username
+            'curent_user_name'=> $username,
+            'curent_name_user'=>  $query->row(0)->nama
             );  
             $this->session->set_userdata($attr);
 

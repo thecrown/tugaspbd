@@ -27,8 +27,8 @@
                   <td><?php echo $row['nama_bidang']; ?></td>
                   <td><?php echo $row['deskripsi_bidang']; ?></td>
                    <td>
-                      <a href="<?php echo base_url('Admin_dashboard/delete_employee/');?><?php echo $row['id'];?>"><button onclick="return confirm('are you sure? delete this Division <?php echo $row['id'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Admin_dashboard/update_employee/'); ?><?php echo $row['id'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Administrator_dashboard/delete_dept/');?><?php echo $row['id'];?>"><button onclick="return confirm('are you sure? delete this Division <?php echo $row['nama_bidang'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
+                      <a href="<?php echo base_url('Administrator_dashboard/update_dept/'); ?><?php echo $row['id'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>
@@ -42,6 +42,10 @@
                   </tr>
                 </tfoot>
               </table>
+              <?php if( isset($error)):
+                  echo $error;
+                  endif;
+              ?>
             </div>
             <!-- /.box-body -->
           </div>
