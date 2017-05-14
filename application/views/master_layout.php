@@ -11,7 +11,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/AdminLTE.min.css')?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>">
 
-  
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/'); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -532,11 +533,11 @@
 
     <!-- Main content -->
    <?php 
-    if (isset($view_data)): 
-      $this->load->view('content/'.$view_data);
+    if (isset($view_dept)): 
+      $this->load->view('content/'.$view_dept);
 
-        elseif(isset($add_user)):
-            $this->load->view('content/'.$add_user);
+        elseif(isset($add_dept)):
+            $this->load->view('content/'.$add_dept);
     ?>
     <?php
         elseif(isset($all_user)):
@@ -836,8 +837,15 @@
 <!-- AdminLTE for table -->
 <script src="<?php echo base_url('assets/');?>plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/');?>plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<!-- page script -->
+<!-- CK Editor -->
+<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/');?>ckeditor/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="<?php echo base_url('assets/');?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+  <!-- page script -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
 <script>
   $(function () {
     $("#example1").DataTable();
@@ -850,6 +858,18 @@
       "autoWidth": false
     });
   });
+</script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1');
+    //bootstrap WYSIHTML5 - text editor
+    $(".textarea").wysihtml5();
+  });
+</script>
+<script>
+$(":file").filestyle({size: "sm"});
 </script>
 </body>
 </html>

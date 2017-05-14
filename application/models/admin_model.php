@@ -11,4 +11,21 @@ class Admin_model extends CI_Model{
             return false;
         }
     }
+    public function add_departmen(){
+        $nama_bidang = $this->input->post('name_dept');
+        $deskripsi_bidang = $this->input->post('deskripsi');
+        
+        $data = array(
+            'nama_bidang'=> $nama_bidang,
+            'deskripsi_bidang'=> $deskripsi_bidang
+        );
+
+        $query = $this->db->insert('tbl_bidang',$data);
+        if($query==true){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 }
