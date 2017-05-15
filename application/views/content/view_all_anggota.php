@@ -37,8 +37,8 @@
                  
                   
                    <td>
-                      <a href="<?php echo base_url('Administrator_dashboard/delete_dept/');?><?php echo $row['id'];?>"><button onclick="return confirm('are you sure? delete this Division <?php echo $row['nama_bidang'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Administrator_dashboard/update_dept/'); ?><?php echo $row['id'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Administrator_dashboard/delete_anggota/');?><?php echo $row['id_anggota'];?>"><button onclick="return confirm('are you sure? delete this Anggota <?php echo $row['nama'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
+                      <a href="<?php echo base_url('Administrator_dashboard/update_anggota/'); ?><?php echo $row['id_anggota'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>

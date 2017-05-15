@@ -31,8 +31,8 @@ class Administrator_dashboard extends CI_Controller {
 		$this->load->view('master_layout',$data);
 	}
 	public function data_cek_dept(){
-		$this->form_validation->set_rules('name_dept','Nama Divisi','xss_clean|trim');
-        $this->form_validation->set_rules('deskripsi','Deskripsi','xss_clean|trim');
+		$this->form_validation->set_rules('name_dept','Nama Divisi','xss_clean|trim|required');
+        $this->form_validation->set_rules('deskripsi','Deskripsi','xss_clean|trim|required');
 
 		if($this->form_validation->run()==false)
 		{
@@ -71,11 +71,13 @@ class Administrator_dashboard extends CI_Controller {
 		$this->load->view('master_layout',$data);
 	}
 	public function data_cek_dept_update($id=null){
-		$this->form_validation->set_rules('name_dept','Nama Divisi','xss_clean|trim');
-        $this->form_validation->set_rules('deskripsi','Deskripsi','xss_clean|trim');
+		$this->form_validation->set_rules('name_dept','Nama Divisi','xss_clean|trim|required');
+        $this->form_validation->set_rules('deskripsi','Deskripsi','xss_clean|trim|required');
 
 		if($this->form_validation->run()==false)
 		{
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$data['user_data']= $this->admin_model->get_update_bidang($id);
 			$data['update_dept']="update_dept";
 			$this->load->view('master_layout',$data);
 		}else{
@@ -92,10 +94,73 @@ class Administrator_dashboard extends CI_Controller {
 		}
         
 	}
-	public function view_all_anggota($id){
+	public function view_all_anggota(){
+		$data['view_all_anggota']="view_all_anggota";
 		$data['data_dept']=$this->admin_model->all_bidang_view();
-		$data['viewa_all_anggota']="viewa_all_anggota";
-		$data['anggota_data']=$this->admin_model->view_all_anggota($id);
+		$data['anggota_data']=$this->admin_model->view_all_anggota();
+		$this->load->view('master_layout',$data);
+	}
+	public function view_all_anggota_bidang($id){
+		$data['data_dept']=$this->admin_model->all_bidang_view();
+		$data['view_all_anggota']="view_all_anggota";
+		$data['anggota_data']=$this->admin_model->view_all_anggota_bidang($id);
+		$this->load->view('master_layout',$data);
+	}
+	public function add_anggota(){
+		$data['data_dept']=$this->admin_model->all_bidang_view();
+		$data['jabatan']=$this->admin_model->get_jabatan();
+		$data['divisi']=$this->admin_model->get_divisi();
+		$data['add_anggota']="add_anggota";
+		$this->load->view('master_layout',$data);
+	}
+	public function data_cek_anggota(){
+		$this->form_validation->set_rules('nama_anggota','Nama Anggota','xss_clean|trim|required');
+        $this->form_validation->set_rules('alamat_anggota','Alamat Anggota','xss_clean|trim|required');
+		$this->form_validation->set_rules('jabatan','Jabatan Anggota','xss_clean|trim|required');
+		$this->form_validation->set_rules('divisi','Divisi Anggota','xss_clean|trim|required');
+		$this->form_validation->set_rules('tanggal','Tanggal masuk Anggota','xss_clean|trim|required');
+		$this->form_validation->set_rules('status','Status Anggota','xss_clean|trim|required');
+
+		if($this->form_validation->run()==false)
+		{
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$data['jabatan']=$this->admin_model->get_jabatan();
+			$data['divisi']=$this->admin_model->get_divisi();
+			$data['add_anggota']="add_anggota";
+			$this->load->view('master_layout',$data);
+		}else{
+			$result = $this->admin_model->add_anggota();
+			 if($result){
+				redirect ('Administrator_dashboard/view_all_anggota');
+			 }else{
+				$data['data_dept']=$this->admin_model->all_bidang_view();
+				$data['jabatan']=$this->admin_model->get_jabatan();
+				$data['divisi']=$this->admin_model->get_divisi();
+				$data['add_anggota']="add_anggota";
+				$data['error']="there something wrong.. please try again";
+				$this->load->view('master_layout',$data);
+			}
+		}
+	}
+	public function delete_anggota($id=null){
+		$query = $this->admin_model->delete_anggota_all($id);
+		if($query){
+			redirect ('Administrator_dashboard/view_all_anggota');
+		}else{
+
+			$data['view_all_anggota']="view_all_anggota";
+			$data['error']="terjadi kesalah delete";
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$data['anggota_data']=$this->admin_model->view_all_anggota();
+			$this->load->view('master_layout',$data);				
+		}
+	}
+	public function update_anggota($id){
+		$data['data_anggota']=$this->admin_model->get_anggota_update($id);
+		$data['data_dept']=$this->admin_model->all_bidang_view();
+		$data['jabatan']=$this->admin_model->get_jabatan();
+		$data['divisi']=$this->admin_model->get_divisi();
+		$data['update_anggota']="update_anggota";
 		$this->load->view('master_layout',$data);
 	}
 }

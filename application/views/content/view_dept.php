@@ -39,6 +39,7 @@
                   <th>no</th>
                   <th>Nama Bidang</th>
                   <th>Deskripsi</th>
+                  <th>Action</th>
                   </tr>
                 </tfoot>
               </table>
