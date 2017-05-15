@@ -357,6 +357,20 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-users"></i> <span>Anggota Himaskom</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php if(isset($data_dept)){ ?>
+            <?php foreach ($data_dept as $data){ ?>
+            <li><a href="<?php echo base_url('Administrator_dashboard/view_all_anggota/'.$data['id']);?>"><i class="fa fa-sitemap"></i>Bidang <?php echo $data['nama_bidang'];?></a></li>
+            <?php }}  ?>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Layout Options</span>
             <span class="pull-right-container">
@@ -544,8 +558,8 @@
             $this->load->view('content/'.$update_dept);
     ?>
     <?php
-        elseif(isset($Human_resource)):
-            $this->load->view('content/'.$Human_resource);
+        elseif(isset($viewa_all_anggota)):
+            $this->load->view('content/'.$viewa_all_anggota);
     ?>
     <?php
         elseif(isset($Client)):

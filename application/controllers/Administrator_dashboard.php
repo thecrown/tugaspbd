@@ -14,17 +14,20 @@ class Administrator_dashboard extends CI_Controller {
 		}
     		
 	public function index()
-	{
+	{	
 		$data['view_data']="view_data";
+		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
 	}
 	public function view_all(){
 		$data['view_dept']="view_dept";
+		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$data['user_data']= $this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
 	}
 	public function add_dept(){
 		$data['add_dept']="add_dept";
+		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
 	}
 	public function data_cek_dept(){
@@ -63,6 +66,7 @@ class Administrator_dashboard extends CI_Controller {
 	}
 	public function update_dept($id){
 		$data['update_dept']="update_dept";
+		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$data['user_data']= $this->admin_model->get_update_bidang($id);
 		$this->load->view('master_layout',$data);
 	}
@@ -87,5 +91,11 @@ class Administrator_dashboard extends CI_Controller {
 			 }
 		}
         
+	}
+	public function view_all_anggota($id){
+		$data['data_dept']=$this->admin_model->all_bidang_view();
+		$data['viewa_all_anggota']="viewa_all_anggota";
+		$data['anggota_data']=$this->admin_model->view_all_anggota($id);
+		$this->load->view('master_layout',$data);
 	}
 }
