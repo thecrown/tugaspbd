@@ -15,16 +15,34 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <?php echo form_open('Administrator_dashboard/data_cek_dept'); ?>
-                  <div class="form-group">
-                  <label for="exampleInputPassword1">Division Name</label>
-                  <input type="text" class="form-control" name="name_dept" id="exampleInputPassword1" placeholder="Name Division">
-                </div>
-                <textarea class="ckeditor" name="deskripsi" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              <?php echo form_open('Administrator_dashboard/add_users_2'); ?>
+              <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+               
+                <label>Jabatan</label>
+                <select class="form-control select2" style="width: 100%;" name="jabatan">
+                  <option value="">Pilih anggota</option>
+                   <?php foreach ($data_anggota as $row)?><?php { ?>
+                  <option value="<?=$row['id_anggota']; ?>"><?=$row['nama']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+              </div>    
+        
+          </div>           
+          
                 <br />
                 <button class="btn btn-primary" type="submit">Submit</button>
              <?php echo form_close(); ?>
             </div>
+            <?php
+                if(isset($error)){
+                echo "<center>";
+                echo $error; 
+                echo "</center>";
+                    }
+                ?>
                 <?php
                 if(validation_errors()){
                 echo "<center>";

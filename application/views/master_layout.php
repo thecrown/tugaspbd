@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>Himaskom Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -17,6 +17,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css')?>">
+
+  <link rel="stylesheet" href="<?php echo base_url('assets'); ?>/plugins/iCheck/all.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/flat/blue.css')?>">
   <!-- Morris chart -->
@@ -48,9 +50,9 @@
     <!-- Logo -->
     <a href="<?php echo base_url('assets/');?>index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>H</b>M</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Himaskom</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -261,16 +263,16 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url('assets/');?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="<?php echo base_url('assets/img/foto/');?><?php echo $this->session->userdata('curent_user_picture'); ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $this->session->userdata('curent_user_name'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url('assets/');?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url('assets/img/foto/');?><?php echo $this->session->userdata('curent_user_picture'); ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  <?php echo $this->session->userdata('curent_name_user');?> - <?php echo $this->session->userdata('curent_user_kd_akses');?>
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -315,24 +317,13 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url('assets/');?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url('assets/img/foto/');?><?php echo $this->session->userdata('curent_user_picture'); ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo $this->session->userdata('curent_name_user');?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
@@ -345,172 +336,52 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('Administrator_dashboard/view_all');?>"><i class="fa fa-sitemap"></i>View All Division</a></li>
-            <li><a href="<?php echo base_url('Administrator_dashboard/add_dept');?>"><i class="fa fa-plus-square"></i>Add New Division</a></li>
-            <!--<li><a href="<?php echo base_url('infokom');?>"><i class="fa fa-paper-plane"></i> Infokom</a></li>
-            <li><a href="<?php echo base_url('Ristek');?>"><i class="fa fa-search"></i> Ristek</a></li>
-            <li><a href="<?php echo base_url('Ekobis');?>"><i class="fa fa-money"></i> Ekobis</a></li>
-            <li><a href="<?php echo base_url('PSDM');?>"><i class="fa fa-users"></i> PSDM</a></li>
-            <li><a href="<?php echo base_url('Kesma');?>"><i class="fa fa-graduation-cap"></i> Kesma</a></li>
-            <li><a href="<?php echo base_url('Mikat');?>"><i class="fa fa-futbol-o"></i> Mikat</a></li>-->
-            
+            <li><a href="<?php echo base_url('Administrator_dashboard/add_dept');?>"><i class="fa fa-plus-square"></i>Add New Division</a></li>         
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
+            <i class="fa fa-users"></i> <span>Anggota Himaskom</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                      <li><a href="<?php echo base_url('Administrator_dashboard/add_anggota');?>"><i class="fa fa-plus-square"></i>Add New Anggota</a></li>
+                      <li><a href="<?php echo base_url('Administrator_dashboard/view_all_anggota');?>"><i class="fa fa-users"></i>View All Anggota</a></li>
+            <?php if(isset($data_dept)){ ?>
+            <?php foreach ($data_dept as $data){ ?>
+            <li><a href="<?php echo base_url('Administrator_dashboard/view_all_anggota_bidang/'.$data['id']);?>"><i class="fa fa-sitemap"></i>Bidang <?php echo $data['nama_bidang'];?></a></li>
+            <?php }}  ?>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Users</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('Administrator_dashboard/view_all_user');?>"><i class="fa fa-users"></i>View All Users</a></li>
+            <li><a href="<?php echo base_url('Administrator_dashboard/add_users');?>"><i class="fa fa-plus-square"></i>Add New Users</a></li>         
           </ul>
         </li>
         <li>
-          <a href="../widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>UI Elements</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li class="active"><a href="data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="../mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Examples</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="../examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="../examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="../examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="../examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="../examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="../examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="../examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="../examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
+            <i class="fa fa-file"></i> <span>Proposal</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
+                <li><a href="<?php echo base_url('Administrator_dashboard/view_all_proposal');?>"><i class="fa fa-file"></i>View All Proposal</a></li>
+                <li><a href="<?php echo base_url('Administrator_dashboard/view_proposal_acc');?>"><i class="fa fa-file"></i>View All Proposal ACC</a></li>
+                <li><a href="<?php echo base_url('Administrator_dashboard/view_proposal_revisi');?>"><i class="fa fa-file"></i>View All Proposal Revisi</a></li>         
               </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
+            </span>
+          </a>
         </li>
-        <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -540,40 +411,40 @@
             $this->load->view('content/'.$add_dept);
     ?>
     <?php
-        elseif(isset($all_user)):
-            $this->load->view('content/'.$all_user);
+        elseif(isset($update_dept)):
+            $this->load->view('content/'.$update_dept);
     ?>
     <?php
-        elseif(isset($Human_resource)):
-            $this->load->view('content/'.$Human_resource);
+        elseif(isset($view_all_anggota)):
+            $this->load->view('content/'.$view_all_anggota);
     ?>
     <?php
-        elseif(isset($Client)):
-            $this->load->view('content/'.$Client);
+        elseif(isset($add_anggota)):
+            $this->load->view('content/'.$add_anggota);
     ?>
     <?php
-        elseif(isset($Design)):
-            $this->load->view('content/'.$Design);
+        elseif(isset($update_anggota)):
+            $this->load->view('content/'.$update_anggota);
     ?>
       <?php
-        elseif(isset($Network)):
-            $this->load->view('content/'.$Network);
+        elseif(isset($view_users)):
+            $this->load->view('content/'.$view_users);
     ?>
     <?php
-        elseif(isset($profile)):
-            $this->load->view($profile);
+        elseif(isset($add_users)):
+            $this->load->view('content/'.$add_users);
     ?>
     <?php
-        elseif(isset($Analysis)):
-            $this->load->view('content/'.$Analysis);
+        elseif(isset($update_users)):
+            $this->load->view('content/'.$update_users);
     ?>
     <?php
-        elseif(isset($all_customer)):
-            $this->load->view('customer/'.$all_customer);
+        elseif(isset($view_proposal)):
+            $this->load->view('content/'.$view_proposal);
     ?>
     <?php
-        elseif(isset($update_customer)):
-            $this->load->view('customer/'.$update_customer);
+        elseif(isset($edit_proposal)):
+            $this->load->view('content/'.$edit_proposal);
     ?>
      <?php
         elseif(isset($add_customer)):
@@ -796,15 +667,6 @@
 <script src="<?php echo base_url('assets/');?>plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets/');?>bootstrap/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="<?php echo base_url('assets/');?>plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url('assets/');?>plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url('assets/');?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url('assets/');?>plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url('assets/');?>dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src= "<?php echo base_url('assets/');?>dist/js/demo.js"></script>
 <!-- Morris.js charts -->
@@ -817,23 +679,16 @@
 <script src="<?php echo base_url('assets/');?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?php echo base_url('assets/');?>plugins/knob/jquery.knob.js"></script>
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="<?php echo base_url('assets/');?>plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="<?php echo base_url('assets/');?>plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="<?php echo base_url('assets/');?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
 <script src="<?php echo base_url('assets/');?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/');?>plugins/fastclick/fastclick.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="<?php echo base_url('assets/');?>plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/');?>dist/js/app.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?php echo base_url('assets/');?>dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('assets/');?>dist/js/demo.js"></script>
 <!-- AdminLTE for table -->
 <script src="<?php echo base_url('assets/');?>plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/');?>plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -842,6 +697,20 @@
 <script type="text/javascript" src="<?php echo base_url('assets/');?>ckeditor/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url('assets/');?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url('assets/');?>plugins/select2/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="<?php echo base_url('assets/');?>plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url('assets/');?>plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url('assets/');?>plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url('assets/');?>plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="<?php echo base_url('assets/');?>plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="<?php echo base_url('assets/');?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
   <!-- page script -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -870,6 +739,79 @@
 </script>
 <script>
 $(":file").filestyle({size: "sm"});
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+
+    //Money Euro
+    $("[data-mask]").inputmask();
+    //Datemask dd/mm/yyyy
+    
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+   
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+          $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+    );
+
+   //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+
+    //Colorpicker
+    $(".my-colorpicker1").colorpicker();
+    //color picker with addon
+    $(".my-colorpicker2").colorpicker();
+
+    //Timepicker
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+  });
+</script>
+<script>
+            $(function () {
+                $('#myDate').datetimepicker();
+            });
 </script>
 </body>
 </html>

@@ -11,8 +11,13 @@
                 <thead>
                 <tr>
                   <th>no</th>
-                  <th>Nama Bidang</th>
-                  <th>Deskripsi</th>
+                  <th>Username</th>
+                  <th>Nama</th>
+                  <!--<th>Password</th>-->
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Departmen</th>
+                  <th>status</th>
                   <th>Action</th>
                   </tr>
                 </thead>
@@ -24,24 +29,24 @@
                    ?>
                 <tr>
                   <td><?php echo $i; ?></td>
+                  <td><?php echo $row['username']; ?></td>
+                  <td><?php echo $row['nama_user']; ?></td>
+                  <!--<td><?php echo $row['password']; ?></td>-->
+                  <td><?php echo $row['role']; ?></td>
+                  <td><?php echo $row['email']; ?></td>
                   <td><?php echo $row['nama_bidang']; ?></td>
-                  <td><?php echo $row['deskripsi_bidang']; ?></td>
+                  <td><?php echo $row['Status']; ?></td>
+                 
+                  
                    <td>
-                      <a href="<?php echo base_url('Administrator_dashboard/delete_dept/');?><?php echo $row['id'];?>"><button onclick="return confirm('are you sure? delete this Division <?php echo $row['nama_bidang'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Administrator_dashboard/update_dept/'); ?><?php echo $row['id'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Administrator_dashboard/delete_users/');?><?php echo $row['id_users'];?>"><button onclick="return confirm('are you sure? delete this Anggota <?php echo $row['nama'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
+                      <a href="<?php echo base_url('Administrator_dashboard/update_users/'); ?><?php echo $row['id_users'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>
                 </tbody>
                 <?php }}?>
-                <tfoot>
-                <tr>
-                  <th>no</th>
-                  <th>Nama Bidang</th>
-                  <th>Deskripsi</th>
-                  <th>Action</th>
-                  </tr>
-                </tfoot>
+                
               </table>
               <?php if( isset($error)):
                   echo $error;

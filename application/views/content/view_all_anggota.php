@@ -11,24 +11,34 @@
                 <thead>
                 <tr>
                   <th>no</th>
-                  <th>Nama Bidang</th>
-                  <th>Deskripsi</th>
+                  <th>Nama</th>
+                  <th>Alamat</th>
+                  <th>Jabatan</th>
+                  <th>Status</th>
+                  <th>Tahun Masuk</th>
+                  <th>Divisi</th>
                   <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                    <?php $i = 0?>
-                  <?php if(isset($user_data)){
-                   foreach($user_data as $row){
+                  <?php if(isset($anggota_data)){
+                   foreach($anggota_data as $row){
                    $i++;
                    ?>
                 <tr>
                   <td><?php echo $i; ?></td>
+                  <td><?php echo $row['nama']; ?></td>
+                  <td><?php echo $row['alamat']; ?></td>
+                  <td><?php echo $row['Nama_Jabatan']; ?></td>
+                  <td><?php echo $row['status']; ?></td>
+                  <td><?php echo $row['tahun_masuk']; ?></td>
                   <td><?php echo $row['nama_bidang']; ?></td>
-                  <td><?php echo $row['deskripsi_bidang']; ?></td>
+                 
+                  
                    <td>
-                      <a href="<?php echo base_url('Administrator_dashboard/delete_dept/');?><?php echo $row['id'];?>"><button onclick="return confirm('are you sure? delete this Division <?php echo $row['nama_bidang'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Administrator_dashboard/update_dept/'); ?><?php echo $row['id'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Administrator_dashboard/delete_anggota/');?><?php echo $row['id_anggota'];?>"><button onclick="return confirm('are you sure? delete this Anggota <?php echo $row['nama'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
+                      <a href="<?php echo base_url('Administrator_dashboard/update_anggota/'); ?><?php echo $row['id_anggota'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>
@@ -37,8 +47,12 @@
                 <tfoot>
                 <tr>
                   <th>no</th>
-                  <th>Nama Bidang</th>
-                  <th>Deskripsi</th>
+                  <th>Nama</th>
+                  <th>Alamat</th>
+                  <th>Jabatan</th>
+                  <th>Status</th>
+                  <th>Tahun Masuk</th>
+                  <th>Divisi</th>
                   <th>Action</th>
                   </tr>
                 </tfoot>
