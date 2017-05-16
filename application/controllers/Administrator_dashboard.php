@@ -217,6 +217,58 @@ class Administrator_dashboard extends CI_Controller {
 		$this->form_validation->set_rules('status','Status Users','xss_clean|trim|required');
 		$this->form_validation->set_rules('nama','Nama Users','xss_clean|trim|required');
 
+
+		if(!empty($_FILES['foto'])){
+			$config['upload_path'] = './assets/img/foto/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['file_name']  = $this->input->post('username');
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('foto'))
+			{
+					// $pesan['tipe_pesan'] = 'alert-danger';
+					// $pesan['pesan'] = $this->upload->display_errors();
+					// $this->session->set_flashdata($pesan);
+					// redirect('admin/alumni/ubah/'.$this->input->post('id_kader'));
+			}
+			else
+			{
+				// $foto_lama = $this->kader->getbyID($this->input->post('id_kader'))->foto;
+				// unlink($config['upload_path'].$foto_lama);
+				$datas      = $this->upload->data();
+				$edit['image_library'] = 'gd2';
+				$edit['source_image']	= './assets/img/foto/'.$datas['file_name'];
+				$edit['create_thumb'] = TRUE;
+				$edit['maintain_ratio'] = TRUE;
+				$edit['width']	= 300;
+				$edit['height']	= 400;
+				$this->load->library('image_lib', $edit);
+				$this->image_lib->resize();
+				$edit_file = explode('.', $datas['file_name']);
+				$nama_foto = $edit_file[0].'_thumb.'.$edit_file[1];
+				unlink($config['upload_path'].$datas['file_name']);
+			}
+
+		}
+
+		$id_pengurus = $this->input->post('id_pengurus');
+        $username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+        $Email = $this->input->post('Email');
+        $Role = $this->input->post('Role');
+        $status = $this->input->post('status');
+        $nama = $this->input->post('nama');
+        $data = array(
+            'username'=> $username,
+            'password'=> $password,
+            'role'=> $Role,
+            'email'=> $Email,
+            'id_pengurus'=> $id_pengurus,
+            'Status'=> $status,
+            'nama_user'=>$nama,
+            'foto'=>$nama_foto
+        );
+
+
 		if($this->form_validation->run()==false)
 		{
 			$data['data_anggota']=$this->admin_model->get_all_anggota();
@@ -224,7 +276,7 @@ class Administrator_dashboard extends CI_Controller {
 			$data['add_users']="add_users";
 			$this->load->view('master_layout',$data);
 		}else{
-			$result = $this->admin_model->do_add_users();
+			$result = $this->admin_model->do_add_users($data);
 			 if($result){
 				redirect ('Administrator_dashboard/view_all_user');
 			 }else{
@@ -262,6 +314,53 @@ class Administrator_dashboard extends CI_Controller {
 			$this->form_validation->set_rules('nama','Nama','xss_clean|trim|required');
 			$this->form_validation->set_rules('status','Status','xss_clean|trim|required');
 			
+			if(!empty($_FILES['foto'])){
+			$config['upload_path'] = './assets/img/foto/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['file_name']  = $this->input->post('username');
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('foto'))
+			{
+					// $pesan['tipe_pesan'] = 'alert-danger';
+					// $pesan['pesan'] = $this->upload->display_errors();
+					// $this->session->set_flashdata($pesan);
+					// redirect('admin/alumni/ubah/'.$this->input->post('id_kader'));
+			}
+			else
+			{
+				// $foto_lama = $this->kader->getbyID($this->input->post('id_kader'))->foto;
+				// unlink($config['upload_path'].$foto_lama);
+				$datas      = $this->upload->data();
+				$edit['image_library'] = 'gd2';
+				$edit['source_image']	= './assets/img/foto/'.$datas['file_name'];
+				$edit['create_thumb'] = TRUE;
+				$edit['maintain_ratio'] = TRUE;
+				$edit['width']	= 300;
+				$edit['height']	= 600;
+				$this->load->library('image_lib', $edit);
+				$this->image_lib->resize();
+				$edit_file = explode('.', $datas['file_name']);
+				$nama_foto = $edit_file[0].'_thumb.'.$edit_file[1];
+				unlink($config['upload_path'].$datas['file_name']);
+			}
+
+		}
+
+		$username = $this->input->post('username');
+        $Email = $this->input->post('Email');
+        $Role = $this->input->post('Role');
+        $nama = $this->input->post('nama');
+        $status = $this->input->post('status');
+            
+        $data = array(
+            'username'=>$username,
+            'role'=>$Role,
+            'email'=>$Email,
+            'Status'=>$status,
+            'nama_user'=>$nama,
+			'foto'=>$nama_foto
+        );
+
 		if($this->form_validation->run()==false)
 		{
 			$data['update_users']="update_users";
@@ -271,7 +370,7 @@ class Administrator_dashboard extends CI_Controller {
 			$this->load->view('master_layout',$data);
 			
 		}else{
-			$result = $this->admin_model->do_update_users($id);
+			$result = $this->admin_model->do_update_users($data,$id);
 			 if($result){
 				redirect ('Administrator_dashboard/view_all_user');
 			 }else{

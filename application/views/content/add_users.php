@@ -1,3 +1,14 @@
+<script>
+  //function upload foto
+        function PreviewImage() {
+          var oFReader = new FileReader();
+          oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+          oFReader.onload = function (oFREvent)
+           {
+              document.getElementById("uploadPreview").src = oFREvent.target.result;
+          };
+        };
+ </script>
 <section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -15,7 +26,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <?php echo form_open('Administrator_dashboard/cek_users_data'); ?>
+              <?php echo form_open_multipart('Administrator_dashboard/cek_users_data'); ?>
               <div class="row">
               <div class="col-md-6">
               <div class="form-group">
@@ -83,7 +94,22 @@
                   <input type="radio" name="status" value="NonAktif" class="flat-red">
                     <label>Tidak Aktif</label>
               </div>
+
+               <div class="form-group">
+                      <label for="exampleInputFile">Foto Produk</label>
+                      <p class="help-block">Silahkan pilih gambar produk anda.</p>
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                          <span class="btn btn-default btn-file">
+                            Browse...<input type="file" name="foto" id="uploadImage" accept=".jpg,.jpeg,.png" onchange="PreviewImage();" required="">
+                          </span>
+                        </span>
+                      </div>
+                      <img id="uploadPreview" src="<?=base_url('assets/img/preview/images.jpg');?>" style="max-width:200px;" /><br/>
+
+                    </div>
                 <br />
+
                 <button class="btn btn-primary" type="submit">Submit</button>
              <?php echo form_close(); ?>
             </div>

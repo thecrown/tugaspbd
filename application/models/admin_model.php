@@ -212,25 +212,7 @@ class Admin_model extends CI_Model{
             return false;
         }
     }
-    public function do_add_users(){
-        $id_pengurus = $this->input->post('id_pengurus');
-        $username = $this->input->post('username');
-        $password = md5($this->input->post('password'));
-        $Email = $this->input->post('Email');
-        $Role = $this->input->post('Role');
-        $status = $this->input->post('Status');
-        $nama = $this->input->post('nama');
-
-        $data = array(
-            'username'=> $username,
-            'password'=> $password,
-            'role'=> $Role,
-            'email'=> $Email,
-            'id_pengurus'=> $id_pengurus,
-            'status'=> $status,
-            'nama_user'=>$nama
-        );
-
+    public function do_add_users($data){
         $query = $this->db->insert('tbl_users',$data);
         if($query==true){
             return true;
@@ -262,23 +244,11 @@ class Admin_model extends CI_Model{
             return false;
         }
     }
-    public function do_update_users($id){
+    public function do_update_users($data,$id){
         $where=array(
             'id_users' => $id
         );
-        $username = $this->input->post('username');
-        $Email = $this->input->post('Email');
-        $Role = $this->input->post('Role');
-        $nama = $this->input->post('nama');
-        $status = $this->input->post('Status');
-            
-        $data = array(
-            'username'=>$username,
-            'role'=>$Role,
-            'email'=>$Email,
-            'status'=>$status,
-            'nama_user'=>$nama
-        );
+        
         $query = $this->db->update('tbl_users', $data ,$where);
         if($query==true){
             return true;

@@ -20,7 +20,7 @@ class Login extends CI_Controller {
 
     public function cek_user_validation(){
         $this->form_validation->set_rules('username','Username','xss_clean|trim');
-        $this->form_validation->set_rules('password','Username','xss_clean|trim');
+        $this->form_validation->set_rules('password','Password','xss_clean|trim');
         
         if($this->form_validation->run()==false){
             $this->load->view('login_page');
@@ -42,7 +42,7 @@ class Login extends CI_Controller {
         $this->session->unset_userdata('curent_user_id');
 		$this->session->unset_userdata('curent_user_kd_akses');
 		$this->session->unset_userdata('curent_user_name');
-
+		
 		$this->session->sess_destroy();
         redirect('Login');
     }

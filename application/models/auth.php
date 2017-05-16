@@ -11,15 +11,16 @@ class Auth extends CI_Model{
             'username' =>$username,
             'password' =>$password
         );
+        
         $query = $this->db->get_where('tbl_users',$datauser);
 
-        if($query->num_rows() >= 1){
+        if($query->num_rows() >=0){
         
             $attr = array(
-            'curent_user_id' => $query->row(0)->id,
+            'curent_user_id' => $query->row(0)->id_users,
             'curent_user_kd_akses' => $query->row(0)->role,
-            'curent_user_name'=> $username,
-            'curent_name_user'=>  $query->row(0)->nama
+            'curent_user_picture' => $query->row(0)->foto,
+            'curent_name_user'=>  $query->row(0)->nama_user
             );  
             $this->session->set_userdata($attr);
 
