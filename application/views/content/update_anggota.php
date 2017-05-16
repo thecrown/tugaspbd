@@ -15,7 +15,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <?php echo form_open('Administrator_dashboard/data_cek_anggota'); ?>
+              <?php echo form_open('Administrator_dashboard/data_cek_anggota_update/'.$data_anggota->id_anggota); ?>
               <div class="row">
               <div class="col-md-6">
                   <div class="form-group">
@@ -28,15 +28,14 @@
                   <label for="exampleInputPassword1">Alamat Anggota</label>
                 <textarea class="ckeditor" name="alamat_anggota" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?=$data_anggota->alamat; ?></textarea>
               </div>
-              <!--sampe sini min-->
+             
               <div class="row">
               <div class="col-md-6">
               <div class="form-group">
                 <label>Jabatan</label>
                 <select class="form-control select2" style="width: 100%;" name="jabatan">
-                  <option value="<?=$data_anggota->kd_jabatan; ?>">Pilih Jabatan</option>
-                 
-                  <?php foreach ($jabatan as $row) { ?>
+                 <option value="">Pilih Jabatan</option>
+                 <?php foreach ($jabatan as $row){ ?>
                   <option value="<?=$row['id']; ?>"><?=$row['Nama_Jabatan']; ?></option>
                   <?php } ?>
                 </select>
@@ -63,19 +62,20 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" id="myDate" name="tanggal" class="form-control pull-right" >
+                  <input type="date" id="myDate" name="tanggal" class="form-control pull-right" value="<?=$data_anggota->tahun_masuk; ?>">
                 </div>
               </div>
             </div>
           </div>
             
             <div class="form-group">
-                  <input type="radio" name="status" value="Aktif" class="flat-red">
+                  <input type="radio" name="status" value="Aktif" class="flat-red" <?php if($data_anggota->status =="Aktif"){echo "checked"; }?>>
+                    
                     <label>
                       Aktif  
                     </label>
                   <br />
-                  <input type="radio" name="status" value="NonAktif" class="flat-red">
+                  <input type="radio" name="status" value="NonAktif" class="flat-red" <?php if($data_anggota->status =="NonAktif"){echo "checked"; }?>>
                     <label>
                       Tidak Aktif  
                     </label>
