@@ -158,14 +158,16 @@ class Ketua_dashboard extends CI_Controller {
                 $status= $this->input->post('status');
 				
 				$config['upload_path'] = './assets/file/';
-   				$config['allowed_types'] = 'docx|doc|pdf';
+   				$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|xml|docx|GIF|JPG|PNG|JPEG|PDF|DOC|XML|DOCX|xls|xlsx';
   				$config['max_size'] = 200048;
+				
    				$config['file_name'] = url_title($judul_proposal,'dash',TRUE);
 				
 				$this->upload->initialize($config);
 				
 				if($this->upload->do_upload('file_porposal')){
-				//
+					$upload_data = $this->upload->data(); 
+  					$file_name =   $upload_data['file_name'];
 				}else{
 					echo "gagal";
 				}
@@ -188,7 +190,7 @@ class Ketua_dashboard extends CI_Controller {
 				'PJ'=>$PJ,
 				'kd_bidang'=>$bidang,
 				'Status_proposal'=>$status,
-				'nama_file'=>$config['file_name'] 
+				'nama_file'=>$file_name
             	);
 
 		$query = $this->Ketua_model->do_insert_proposal($data);
@@ -296,7 +298,7 @@ class Ketua_dashboard extends CI_Controller {
                 $status= $this->input->post('status');
 				
 				$config['upload_path'] = './assets/file/';
-   				$config['allowed_types'] = 'docx|doc|pdf';
+   				$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|xml|docx|GIF|JPG|PNG|JPEG|PDF|DOC|XML|DOCX|xls|xlsx';
   				$config['max_size'] = 200048;
    				$config['file_name'] = url_title($judul_proposal,'dash',TRUE);
 				
