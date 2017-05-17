@@ -187,4 +187,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 return false;
             }
         }
+        public function delete_proposal($id){
+            $where = array(
+                'id_proposal'=>$id
+            );
+            $query = $this->db->delete('tbl_proposal',$where);
+            if($query){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function edit_proposal($id){
+            $where=array(
+                'id_proposal'=>$id
+            );
+            $query = $this->db->get_where('tbl_proposal',$where);
+            if($query->num_rows()>=0)
+            {
+                return $query->row();
+            }else{
+                return false;
+            }
+        }
+        public function get_data_PJ(){
+            $where=array(
+                'id_dept'=>$this->session->userdata('curent_bidang_user')
+            );
+            $this->db->select('*');
+            $this->db->from('tbl_anggota');
+            $this->db->where($where);
+            $query = $this->db->get();
+            if($query->num_rows()>=0)
+            {
+                return $query->result_array();
+            }else{
+                return false;
+            }
+        }
+        public function get_bidang(){
+            $where = array(
+                'id'=>$this->session->userdata('curent_bidang_user')
+            );
+            $result = $this->db->get_where('tbl_bidang',$where);
+            if($result->num_rows()>=0){
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+        public function do_update_proposal($id,$data){
+            $where = array(
+                'id_proposal'=>$id
+            );
+             $query = $this->db->update('tbl_proposal',$data,$where);
+            if($query){
+                return true;
+            }else{
+                return false;
+            }
+        } 
     }

@@ -37,8 +37,8 @@
                  
                   
                    <td>
-                      <a href="<?php echo base_url('Administrator_dashboard/delete_proposal/');?><?php echo $row['id_proposal'];?>"><button onclick="return confirm('are you sure? delete this Proposal <?php echo $row['nama_proker'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Administrator_dashboard/edit_proposal/'); ?><?php echo $row['id_proposal'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Ketua_dashboard/delete_proposal/');?><?php echo $row['id_proposal'];?>"><button onclick="return confirm('are you sure? delete this Proposal <?php echo $row['nama_proker'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
+                      <a href="<?php echo base_url('Ketua_dashboard/edit_proposal/'); ?><?php echo $row['id_proposal'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>

@@ -401,16 +401,16 @@
             $this->load->view('content/'.$add_users);
     ?>
     <?php
-        elseif(isset($update_users)):
-            $this->load->view('content/'.$update_users);
+        elseif(isset($edit_proposal)):
+            $this->load->view('content_ketua/'.$edit_proposal);
     ?>
     <?php
         elseif(isset($view_proposal)):
-            $this->load->view('content/'.$view_proposal);
+            $this->load->view('content_ketua/'.$view_proposal);
     ?>
     <?php
         elseif(isset($edit_proposal)):
-            $this->load->view('content/'.$edit_proposal);
+            $this->load->view('content_ketua/'.$edit_proposal);
     ?>
      <?php
         elseif(isset($add_customer)):
