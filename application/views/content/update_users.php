@@ -87,7 +87,17 @@
                   <label for="exampleInputPassword1">Nama</label>
                   <input type="text" class="form-control" value="<?=$data_users->nama; ?>" name="nama" id="exampleInputPassword1" placeholder="Nama">
                   </div>
-              </div>   
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="exampleInputPassword1">Bidang</label>
+                  <select class="form-control select2" style="width: 100%;" name="bidang">
+                    <?php foreach($data_divisi as $row) {?>
+                    <option value="<?=$row->id; ?>"><?=$row->nama_bidang; ?></option>
+                    <?php } ?>
+                  </select>
+                  </div>
+              </div>    
           </div>           
              <label>Status</label>
             <div class="form-group">
@@ -101,7 +111,7 @@
 
               
                <div class="form-group">
-                      <label for="exampleInputFile">Foto Produk</label>
+                      <label for="exampleInputFile">Foto User</label>
                       <p class="help-block">Silahkan pilih gambar produk anda.</p>
                       <div class="input-group">
                         <span class="input-group-btn">

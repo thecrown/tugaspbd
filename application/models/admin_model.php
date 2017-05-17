@@ -141,6 +141,25 @@ class Admin_model extends CI_Model{
             return false; 
         }
     }
+    public function get_divisi_for_user($id = null){
+         $where =array(
+             'id'=>$id
+         );
+         $query = $this->db->get_where('tbl_bidang',$where);
+        if($query->num_rows()>=0){
+            return $query->result();
+        }else{
+            return false; 
+        }
+    }
+    public function get_divisi_for_user_all(){
+         $query = $this->db->get_where('tbl_bidang');
+        if($query->num_rows()>=0){
+            return $query->result();
+        }else{
+            return false; 
+        }
+    }
     public function delete_anggota_all($id){
         $where = array(
             'id_anggota'=>$id
@@ -257,7 +276,9 @@ class Admin_model extends CI_Model{
         }
     }
     public function view_all_proposal(){
-        $query = $this->db->get('tbl_proposal');
+        $this->db->select('*');
+        $this->db->join('tbl_anggota','tbl_proposal.PJ=tbl_anggota.id_anggota','innner join');
+        $query = $this->db->get_where('tbl_proposal');
         if($query->num_rows()>=0){
             return $query->result_array();
         }else{
@@ -268,6 +289,8 @@ class Admin_model extends CI_Model{
         $where = array(
             'Status_proposal'=>"ACC"
         );
+        $this->db->select('*');
+        $this->db->join('tbl_anggota','tbl_proposal.PJ=tbl_anggota.id_anggota','innner join');
         $query = $this->db->get_where('tbl_proposal',$where);
         if($query->num_rows()>=0){
             return $query->result_array();
@@ -275,10 +298,26 @@ class Admin_model extends CI_Model{
             return false;
         }
     }
+    public function view_all_proposal_pengajuan(){
+        $where = array(
+            'Status_proposal'=>"Pengajuan"
+        );
+        $this->db->select('*');
+        $this->db->join('tbl_anggota','tbl_proposal.PJ=tbl_anggota.id_anggota','innner join');
+        $query = $this->db->get_where('tbl_proposal',$where);
+        if($query->num_rows()>=0){
+            return $query->result_array();
+        }else{
+            return false;
+            }
+        
+    }
     public function view_proposal_revisi(){
         $where = array(
             'Status_proposal'=>"Revisi",
         );
+        $this->db->select('*');
+        $this->db->join('tbl_anggota','tbl_proposal.PJ=tbl_anggota.id_anggota','innner join');
         $query = $this->db->get_where('tbl_proposal',$where);
         if($query->num_rows()>=0){
             return $query->result_array();
@@ -298,6 +337,5 @@ class Admin_model extends CI_Model{
         }else{
             return false;
         }
-
     }
 }

@@ -10,9 +10,9 @@ class Login extends CI_Controller {
 
 	public function index()
 	 {	
-	 	$query = $this->Auth->is_logged_in();
-	 	if($query==true){
-	 		redirect ('Administrator_dashboard');
+		$query = $this->Auth->is_admin();
+	 	if($query==="Administrator"){
+	 		redirect('Administrator_dashboard');
 	 	}else{
 	 		$this->load->view('login_page');
 	 	}

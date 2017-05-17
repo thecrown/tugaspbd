@@ -8,8 +8,8 @@ class Administrator_dashboard extends CI_Controller {
 		$this->load->model('admin_model');
 		
         $this->load->model('Auth');
-			if($this->Auth->is_logged_in()==false){
-				redirect('Login');
+			if($this->Auth->is_Admin()!="Administrator"){
+				redirect('Ketua_dashboard');
 			}
 		}
     		
@@ -203,6 +203,7 @@ class Administrator_dashboard extends CI_Controller {
 	public function add_users(){
 		
 		$data['data_anggota']=$this->admin_model->get_all_anggota();
+		$data['data_divisi']=$this->admin_model->get_divisi_for_user_all();
 		$data['add_users']="add_users";
 		$data['data_dept']=$this->admin_model->all_bidang_view();//ngambil semua view bidang dibawa ke sidebar
 		$this->load->view('master_layout',$data);
@@ -216,7 +217,7 @@ class Administrator_dashboard extends CI_Controller {
 		$this->form_validation->set_rules('Role','Role Users','xss_clean|trim|required');
 		$this->form_validation->set_rules('status','Status Users','xss_clean|trim|required');
 		$this->form_validation->set_rules('nama','Nama Users','xss_clean|trim|required');
-
+		$this->form_validation->set_rules('bidang','Bidang Users','xss_clean|trim|required');
 
 		if(!empty($_FILES['foto'])){
 			$config['upload_path'] = './assets/img/foto/';
@@ -257,6 +258,7 @@ class Administrator_dashboard extends CI_Controller {
         $Role = $this->input->post('Role');
         $status = $this->input->post('status');
         $nama = $this->input->post('nama');
+		$id_bidang= $this->input->post('bidang');
         $data = array(
             'username'=> $username,
             'password'=> $password,
@@ -265,6 +267,7 @@ class Administrator_dashboard extends CI_Controller {
             'id_pengurus'=> $id_pengurus,
             'Status'=> $status,
             'nama_user'=>$nama,
+			'id_bidang'=>$id_bidang,
             'foto'=>$nama_foto
         );
 
@@ -300,9 +303,11 @@ class Administrator_dashboard extends CI_Controller {
 			$this->load->view('master_layout',$data);
 		}
 	}
-	public function update_users($id){
+	public function update_users($id,$where){
 			$data['update_users']="update_users";
 			$data['data_anggota']=$this->admin_model->get_all_anggota();
+			$data['data_divisi']=$this->admin_model->get_divisi_for_user($where);
+			
 			$data['data_users']=$this->admin_model->get_users_update($id);
 			$data['data_dept']=$this->admin_model->all_bidang_view();//ngambil semua view bidang dibawa ke sidebar
 			$this->load->view('master_layout',$data);
@@ -405,6 +410,12 @@ class Administrator_dashboard extends CI_Controller {
 		$data['edit_proposal']="edit_proposal";
 		$data['data_anggota']=$this->admin_model->get_all_anggota();
 		$data['data_proposal']=$this->admin_model->get_proposal_update($id);
+		$data['data_dept']=$this->admin_model->all_bidang_view();
+		$this->load->view('master_layout',$data);
+	}
+	public function view_all_proposal_pengajuan(){
+		$data['view_proposal']="view_proposal";
+		$data['proposal_data']= $this->admin_model->view_all_proposal_pengajuan();
 		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
 	}
