@@ -338,4 +338,27 @@ class Admin_model extends CI_Model{
             return false;
         }
     }
+    public function delete_proposal($id){
+        $where = array (
+            'id_proposal'=>$id
+        );
+        $query = $this->db->delete('tbl_proposal',$where);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public function do_update_proposal($id,$data){
+        $where=array(
+            'id_proposal'=>$id
+        );
+        $query = $this->db->update('tbl_proposal',$data,$where);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

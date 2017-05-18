@@ -5,7 +5,10 @@ class Administrator_dashboard extends CI_Controller {
 
 		function __construct() {
         parent::__construct();
+		$this->load->library('upload');
 		$this->load->model('admin_model');
+		$this->load->model('Ketua_model');
+		
 		
         $this->load->model('Auth');
 			if($this->Auth->is_Admin()!="Administrator"){
@@ -413,11 +416,97 @@ class Administrator_dashboard extends CI_Controller {
 		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
 	}
+	public function data_cek_proposal_update($id=null){
+		
+		$this->form_validation->set_rules('judul_proposal','Judul Proposal','trim|xss_clean|required');
+		$this->form_validation->set_rules('dana_diajukan','Dana diajukan','trim|xss_clean|required');
+		$this->form_validation->set_rules('deskripsi','Deskripsi','trim|xss_clean|required');
+		$this->form_validation->set_rules('PJ','PJ','trim|xss_clean|required');
+		$this->form_validation->set_rules('bidang','Bidang','trim|xss_clean|required');
+		$this->form_validation->set_rules('status','Status','trim|xss_clean|required');
+
+		
+		 $judul_proposal = $this->input->post('judul_proposal');
+                $dana_diajukan = $this->input->post('dana_diajukan');
+                $deskripsi = $this->input->post('deskripsi');
+                $PJ = $this->input->post('PJ');
+                $bidang = $this->input->post('bidang');
+                $status= $this->input->post('status');
+				
+				$config['upload_path'] = './assets/file/';
+   				$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|xml|docx|GIF|JPG|PNG|JPEG|PDF|DOC|XML|DOCX|xls|xlsx';
+  				$config['max_size'] = 200048;
+   				$config['file_name'] = url_title($judul_proposal,'dash',TRUE);
+				  // $config['file_name'] = $judul_proposal;
+				
+				$this->upload->initialize($config);
+				$this->load->library('upload', $config);
+
+				if($this->upload->do_upload('file_porposal2')){
+					$upload_data = $this->upload->data(); 
+  					$file_name =   $upload_data['file_name'];
+				}else{
+					echo "gagal";
+				}
+		
+		if($this->form_validation->run()==false){
+			$data['edit_proposal']="edit_proposal";
+			$data['error']="sorry error upload";
+			$data['data_anggota']=$this->admin_model->get_all_anggota();
+			$data['data_proposal']=$this->admin_model->get_proposal_update($id);
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$this->load->view('master_layout',$data);
+		}else{  
+			$data=array(
+                'nama_proker'=>$judul_proposal,
+				'pengajuan_dana'=>$dana_diajukan,
+				'deskripsi_proker'=>$deskripsi,
+				'PJ'=>$PJ,
+				'kd_bidang'=>$bidang,
+				'Status_proposal'=>$status,
+				'nama_file'=> $file_name
+            	);
+
+				$where=array(
+					'id_proposal'=>$id
+				);
+			$query = $this->admin_model->do_update_proposal($id,$data);
+			if($query){
+				redirect('Administrator_dashboard/view_all_proposal/');
+			}else{
+				$data['view_proposal']="view_proposal";
+				$data['proposal_data']= $this->admin_model->view_all_proposal();
+				$data['data_dept']=$this->admin_model->all_bidang_view();
+				
+				$data['error']="terdapat kesalahan saat input data";
+				$this->load->view('master_layout',$data);
+				
+			}
+		}
+
+	}
+
 	public function view_all_proposal_pengajuan(){
 		$data['view_proposal']="view_proposal";
 		$data['proposal_data']= $this->admin_model->view_all_proposal_pengajuan();
 		$data['data_dept']=$this->admin_model->all_bidang_view();
 		$this->load->view('master_layout',$data);
+	}
+	public function delete_proposal($id=null){
+		$query = $this->admin_model->delete_proposal($id);
+		if($query){
+			$data['view_proposal']="view_proposal";
+			$data['proposal_data']= $this->admin_model->view_all_proposal();
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$this->load->view('master_layout',$data);	
+		}else{
+			$data['view_proposal']="view_proposal";
+			$data['proposal_data']= $this->admin_model->view_all_proposal();
+			$data['data_dept']=$this->admin_model->all_bidang_view();
+			$data['error']="there something wrong.. please try again";
+			$this->load->view('master_layout',$data);
+		}
+	
 	}
 	
 }

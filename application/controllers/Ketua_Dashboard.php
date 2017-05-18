@@ -282,6 +282,7 @@ class Ketua_dashboard extends CI_Controller {
 			$this->load->view('ketua_layout',$data);
 	}
 	public function cek_data_proposal_update($id=null){
+		
 		$this->form_validation->set_rules('judul_proposal','Judul Proposal','trim|xss_clean|required');
 		$this->form_validation->set_rules('dana_diajukan','Dana diajukan','trim|xss_clean|required');
 		$this->form_validation->set_rules('deskripsi','Deskripsi','trim|xss_clean|required');
@@ -305,7 +306,8 @@ class Ketua_dashboard extends CI_Controller {
 				$this->upload->initialize($config);
 				
 				if($this->upload->do_upload('file_porposal')){
-				//
+					$upload_data = $this->upload->data(); 
+  					$file_name =   $upload_data['file_name'];
 				}else{
 					echo "gagal";
 				}
@@ -328,7 +330,7 @@ class Ketua_dashboard extends CI_Controller {
 				'PJ'=>$PJ,
 				'kd_bidang'=>$bidang,
 				'Status_proposal'=>$status,
-				'nama_file'=>$config['file_name'] 
+				'nama_file'=>$file_name 
             	);
 				$where=array(
 					'id_proposal'=>$id
