@@ -40,7 +40,7 @@
                   
                    <td>
                       <a href="<?php echo base_url('Administrator_dashboard/delete_users/');?><?php echo $row['id_users'];?>"><button onclick="return confirm('are you sure? delete this Anggota <?php echo $row['nama'];?>');" class="btn btn-danger"><i class="fa fa-trash bigicon"></i></button></a> 
-                      <a href="<?php echo base_url('Administrator_dashboard/update_users/'); ?><?php echo $row['id_users'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
+                      <a href="<?php echo base_url('Administrator_dashboard/update_users/'); ?><?php echo $row['id_users'];?>/<?php echo $row['id_bidang'];?>"><button class="btn btn-default"><i class="fa fa-upload"></i></button></a>
                                             
                    </td>
                 </tr>

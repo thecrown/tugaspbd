@@ -329,42 +329,14 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-sitemap"></i> <span>Bidang Himaskom</span>
+            <i class="fa fa-sitemap"></i> <span>Bidang <?= $data_bidang_user->nama_bidang; ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Administrator_dashboard/view_all');?>"><i class="fa fa-sitemap"></i>View All Division</a></li>
-            <li><a href="<?php echo base_url('Administrator_dashboard/add_dept');?>"><i class="fa fa-plus-square"></i>Add New Division</a></li>         
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i> <span>Anggota Himaskom</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-                      <li><a href="<?php echo base_url('Administrator_dashboard/add_anggota');?>"><i class="fa fa-plus-square"></i>Add New Anggota</a></li>
-                      <li><a href="<?php echo base_url('Administrator_dashboard/view_all_anggota');?>"><i class="fa fa-users"></i>View All Anggota</a></li>
-            <?php if(isset($data_dept)){ ?>
-            <?php foreach ($data_dept as $data){ ?>
-            <li><a href="<?php echo base_url('Administrator_dashboard/view_all_anggota_bidang/'.$data['id']);?>"><i class="fa fa-sitemap"></i>Bidang <?php echo $data['nama_bidang'];?></a></li>
-            <?php }}  ?>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>Users</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Administrator_dashboard/view_all_user');?>"><i class="fa fa-users"></i>View All Users</a></li>
-            <li><a href="<?php echo base_url('Administrator_dashboard/add_users');?>"><i class="fa fa-plus-square"></i>Add New Users</a></li>         
+            <li><a href="<?php echo base_url('Ketua_dashboard/view_all/'.$data_bidang_user->id_bidang);?>"><i class="fa fa-sitemap"></i>View All Anggota</a></li>
+            <li><a href="<?php echo base_url('Ketua_dashboard/add_anggota_bidang');?>"><i class="fa fa-plus-square"></i>Add New Anggota</a></li>         
           </ul>
         </li>
         <li>
@@ -374,10 +346,11 @@
               <i class="fa fa-angle-left pull-right"></i>
               </span>
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('Administrator_dashboard/view_all_proposal');?>"><i class="fa fa-file"></i>View All Proposal</a></li>
-                <li><a href="<?php echo base_url('Administrator_dashboard/view_all_proposal_pengajuan');?>"><i class="fa fa-file"></i>View All Proposal Pengajuan</a></li>
-                <li><a href="<?php echo base_url('Administrator_dashboard/view_proposal_acc');?>"><i class="fa fa-file"></i>View All Proposal ACC</a></li>
-                <li><a href="<?php echo base_url('Administrator_dashboard/view_proposal_revisi');?>"><i class="fa fa-file"></i>View All Proposal Revisi</a></li>         
+                <li><a href="<?php echo base_url('Ketua_dashboard/add_proposal_bidang');?>"><i class="fa fa-file"></i>Add Proposal</a></li>
+                <li><a href="<?php echo base_url('Ketua_dashboard/view_all_proposal');?>"><i class="fa fa-file"></i>View All Proposal</a></li>
+                <li><a href="<?php echo base_url('Ketua_dashboard/view_all_proposal_pengajuan');?>"><i class="fa fa-file"></i>View All Proposal Pengajuan</a></li>
+                <li><a href="<?php echo base_url('Ketua_dashboard/view_proposal_acc');?>"><i class="fa fa-file"></i>View All Proposal ACC</a></li>
+                <li><a href="<?php echo base_url('Ketua_dashboard/view_proposal_revisi');?>"><i class="fa fa-file"></i>View All Proposal Revisi</a></li>         
               </ul>
             </span>
           </a>
@@ -408,44 +381,36 @@
     if (isset($view_dept)): 
       $this->load->view('content/'.$view_dept);
 
-        elseif(isset($add_dept)):
-            $this->load->view('content/'.$add_dept);
-    ?>
-    <?php
-        elseif(isset($update_dept)):
-            $this->load->view('content/'.$update_dept);
-    ?>
-    <?php
-        elseif(isset($view_all_anggota)):
-            $this->load->view('content/'.$view_all_anggota);
+        elseif(isset($view_all)):
+            $this->load->view('content_ketua/'.$view_all);
     ?>
     <?php
         elseif(isset($add_anggota)):
-            $this->load->view('content/'.$add_anggota);
+            $this->load->view('content_ketua/'.$add_anggota);
     ?>
     <?php
         elseif(isset($update_anggota)):
-            $this->load->view('content/'.$update_anggota);
+            $this->load->view('content_ketua/'.$update_anggota);
     ?>
       <?php
-        elseif(isset($view_users)):
-            $this->load->view('content/'.$view_users);
+        elseif(isset($add_proposal)):
+            $this->load->view('content_ketua/'.$add_proposal);
     ?>
     <?php
         elseif(isset($add_users)):
             $this->load->view('content/'.$add_users);
     ?>
     <?php
-        elseif(isset($update_users)):
-            $this->load->view('content/'.$update_users);
+        elseif(isset($edit_proposal)):
+            $this->load->view('content_ketua/'.$edit_proposal);
     ?>
     <?php
         elseif(isset($view_proposal)):
-            $this->load->view('content/'.$view_proposal);
+            $this->load->view('content_ketua/'.$view_proposal);
     ?>
     <?php
         elseif(isset($edit_proposal)):
-            $this->load->view('content/'.$edit_proposal);
+            $this->load->view('content_ketua/'.$edit_proposal);
     ?>
      <?php
         elseif(isset($add_customer)):
